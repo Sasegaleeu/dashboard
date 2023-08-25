@@ -1,4 +1,4 @@
-package com.delivery.dashboard.receiver;
+package com.delivery.dashboard.deliveries;
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -6,5 +6,5 @@ import com.delivery.dashboard.domain.Deliveries;
 
 @Mapper
 public interface DeliveriesMapper {
-    void updateDeliveryLocation(Deliveries deliveries);
+    void updateLocation(Deliveries deliveries);
 }
