@@ -93,6 +93,12 @@
 			<version>3.0.2</version>
 			<scope>test</scope>
 		</dependency>
+				<!-- https://mvnrepository.com/artifact/org.webjars/sockjs-client -->
+		<dependency>
+			<groupId>org.webjars</groupId>
+			<artifactId>sockjs-client</artifactId>
+			<version>1.5.1</version>
+		</dependency>
 	</dependencies>
 
 	<build>
