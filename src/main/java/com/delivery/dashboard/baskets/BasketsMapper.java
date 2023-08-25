@@ -9,6 +9,5 @@ import com.delivery.dashboard.domain.Baskets;
 
 @Mapper
 public interface BasketsMapper {
-    List<Baskets> getTest();
     List<Baskets> getBasketDataWithLocation();
 }

@@ -11,10 +11,6 @@
     <result property="order_id" column="order_id"/>
 </resultMap>
 
-    <select id="getTest" parameterType="com.delivery.dashboard.domain.Baskets">
-        SELECT * FROM Baskets
-    </select>
-
      <select id="getBasketDataWithLocation" resultMap="BasketDeliveryMap">
         SELECT
             b.basket_id,

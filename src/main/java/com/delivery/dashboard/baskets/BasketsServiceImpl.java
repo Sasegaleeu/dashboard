@@ -16,11 +16,6 @@ public class BasketsServiceImpl implements BasketsService {
     private final BasketsMapper basketsMapper;
 
     @Override
-    public List<Baskets> getTest() {
-        return basketsMapper.getTest();
-    }
-
-    @Override
     public List<Baskets> getBasketDataWithLocation() {
         return basketsMapper.getBasketDataWithLocation();
     }
