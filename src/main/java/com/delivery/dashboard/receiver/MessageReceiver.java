@@ -3,6 +3,9 @@ package com.delivery.dashboard.receiver;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+
+import com.delivery.dashboard.domain.Deliveries;
+
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -13,6 +16,7 @@ public class MessageReceiver {
 
     @Value("${rabbitmq.queue.name}")
     private String queueName;
+    private final DeliveriesMapper deliveriesMapper;
 
     /**
      * RabbitMQ에서 메시지를 수신하여 처리하는 메서드.
@@ -33,6 +37,14 @@ public class MessageReceiver {
             log.info("Order ID: " + order_id);
             log.info("Latitude: " + latitude);
             log.info("Longitude: " + longitude);
+            // Deliveries 객체 생성 및 데이터 설정
+            Deliveries deliveries = new Deliveries();
+            deliveries.setOrder_id(order_id);
+            deliveries.setLatitude(latitude);
+            deliveries.setLongitude(longitude);
+            // 데이터베이스 업데이트
+            deliveriesMapper.updateDeliveryLocation(deliveries);            
+            log.info("Updated delivery location for order ID: " + order_id);
         } catch (Exception e) {
             log.error("Error occurred while processing message: " + message, e);
         }
