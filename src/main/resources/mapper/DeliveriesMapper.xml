@@ -4,12 +4,9 @@
 <mapper namespace="com.delivery.dashboard.deliveries.DeliveriesMapper">
 
     <update id="updateLocation" parameterType="Deliveries">
-        UPDATE 
-            Deliveries
-        SET 
-            latitude = #{latitude}, longitude = #{longitude}
-        WHERE 
-            order_id = #{order_id};
+        UPDATE Deliveries
+        SET latitude = #{latitude}, longitude = #{longitude}
+        WHERE order_id = #{order_id};
     </update>
 
 </mapper>

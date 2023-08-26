@@ -24,9 +24,9 @@ public class MessageReceiver {
 
     /**
      * RabbitMQ에서 메시지를 수신하여 처리하는 메서드.
-     * 메시지 형식은 "주문 ID, 위도, 경도"이며 각 부분을 분리해 로깅합니다.
+     * 메시지 형식은 "주문 ID, 위도, 경도"로 구성되어 있으며 각 부분을 분리하여 처리합니다.
      *
-     * @param message 수신된 메시지
+     * @param message 수신된 메시지 (형식: "주문 ID, 위도, 경도")
      */
     @RabbitListener(queues = "${rabbitmq.queue.name}")
     public void receiveMessage(String message) {
@@ -36,13 +36,12 @@ public class MessageReceiver {
             int order_id = Integer.parseInt(messageParts[0].trim());
             double latitude = Double.parseDouble(messageParts[1].trim());
             double longitude = Double.parseDouble(messageParts[2].trim());
-            // Deliveries 객체 생성 및 데이터 설정
             Deliveries deliveries = Deliveries.builder()
                     .order_id(order_id)
                     .latitude(latitude)
                     .longitude(longitude)
                     .build();
-            // 데이터베이스 업데이트
+
             deliveriesMapper.updateLocation(deliveries);
             webSocketService.notifyDashboardUpdate(deliveries);
         } catch (Exception e) {
